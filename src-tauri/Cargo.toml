@@ -1,0 +1,38 @@
+[package]
+name = "lextimer"
+version = "1.0.0"
+description = "LexTimer — Contabilidade para Advogados"
+authors = ["LexTimer"]
+edition = "2021"
+
+[package.metadata.bundle]
+name = "LexTimer"
+identifier = "com.lextimer.app"
+icon = [
+  "icons/32x32.png",
+  "icons/128x128.png",
+  "icons/icon.icns",
+  "icons/icon.ico",
+]
+
+[lib]
+name = "lextimer_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+tauri-plugin-autostart = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+notify = "6"
+chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1", features = ["full"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_UI_WindowsAndMessaging", "Win32_Foundation"] }
